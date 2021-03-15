@@ -59,6 +59,9 @@ class Macro extends Method
     protected function addLocationToPhpDoc()
     {
         $enclosingClass = $this->method->getClosureScopeClass();
+        if ($enclosingClass === null) {
+            $enclosingClass = $this->method->getDeclaringClass();
+        }
 
         /** @var \ReflectionMethod $enclosingMethod */
         $enclosingMethod = Collection::make($enclosingClass->getMethods())
